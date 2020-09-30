@@ -7,7 +7,13 @@ export const useLocalStorage = (key, initialValue) => {
         return item ? JSON.parse(window.localStorage.getItem(key)) : initialValue;
     });
 
-    return storedValue;
+    const setValue = value => {
+        setStoredValue(value);
+
+        window.localStorage.setItem(key, JSON.stringify(value));
+    };
+
+    return [storedValue, setValue];
 };
 
 export default useLocalStorage;
